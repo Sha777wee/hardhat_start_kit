@@ -61,8 +61,8 @@ npm install rimraf --save-dev
 修改部署脚本 deploy.js
 
 ```js
-const { ethers } = require("hardhat");
-
+const { ethers, config } = require("hardhat");
+const fs = require("fs");
 let contractToDeploy = [
   {
     name: "Lock",
@@ -74,12 +74,14 @@ let contractToDeploy = [
 ];
 
 let contractDeployedInfo = {};
+let accountInfo = [];
 
 async function main() {
   [deployer, addr1, addr2] = await ethers.getSigners();
   console.log(`========== Deploy contract by ${deployer.address} ==========`);
 
-  const chainId = ethers.provider.network.chainId;
+  const chainId = (await ethers.provider.getNetwork()).chainId;
+
   for (let contract of contractToDeploy) {
     const contracFactory = await ethers.getContractFactory(contract.name);
     const contractInstance = await contracFactory.deploy(...contract.params);
@@ -95,14 +97,14 @@ async function main() {
     );
   }
   exportDeployedContractInfo();
+  exportAccountInfo();
 }
 
-// 部署合约脚本执行完,导出所有已部署合约地址
+// 导出所有已部署合约地址
 function exportDeployedContractInfo() {
-  const fs = require("fs");
   fs.writeFile(
     "./artifacts/contracts/contractInfo.json",
-    JSON.stringify(contractDeployedInfo),
+    JSON.stringify(contractDeployedInfo, "", "\t"),
     (err) => {
       if (err) {
         console.log(
@@ -113,6 +115,35 @@ function exportDeployedContractInfo() {
         console.log(
           "=========== Success to export deployed contract info! =========="
         );
+      }
+    }
+  );
+}
+
+// 导出hardhat中的账户地址和私钥
+async function exportAccountInfo() {
+  const accounts = config.networks.hardhat.accounts;
+  for (let i = 0; i < 20; i++) {
+    const wallet = ethers.Wallet.fromMnemonic(
+      accounts.mnemonic,
+      accounts.path + `/${i}`
+    );
+    const address = wallet.address;
+    const privateKey = wallet.privateKey;
+    accountInfo.push({ address: address, privateKey: privateKey });
+  }
+
+  fs.writeFile(
+    "./artifacts/contracts/account.json",
+    JSON.stringify(accountInfo, "", "\t"),
+    (err) => {
+      if (err) {
+        console.log(
+          "=========== Faied to export account info! ==========",
+          err
+        );
+      } else {
+        console.log("=========== Success to export account info! ==========");
       }
     }
   );
