@@ -1,0 +1,25 @@
+{
+  "name": "bc_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compile": "npx hardhat compile",
+    "build": "npx hardhat compile",
+    "deploy": "npx hardhat run scripts/deploy.js && npm run copy",
+    "copy": "rimraf ../bc_client/src/contracts && cp -R ./artifacts/contracts ../bc_client/src/contracts",
+    "server": "npx hardhat node --port 8545",
+    "test": "npx hardhat test",
+    "clean" :"npx hardhat clean"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "hardhat": "^2.13.1",
+    "rimraf": "^5.0.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.8.3"
+  }
+}
