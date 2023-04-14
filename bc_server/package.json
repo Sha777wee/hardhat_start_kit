@@ -6,7 +6,7 @@
   "scripts": {
     "compile": "npx hardhat compile",
     "build": "npx hardhat compile",
-    "deploy": "npx hardhat run scripts/deploy.js && npm run copy",
+    "deploy": "npx hardhat run scripts/deploy.js --network localhost && npm run copy",
     "copy": "rimraf ../bc_client/src/contracts && cp -R ./artifacts/contracts ../bc_client/src/contracts",
     "server": "npx hardhat node --port 8545",
     "test": "npx hardhat test",
