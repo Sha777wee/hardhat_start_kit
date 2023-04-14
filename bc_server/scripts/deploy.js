@@ -2,11 +2,8 @@ const { ethers, config } = require("hardhat");
 const fs = require("fs");
 let contractToDeploy = [
   {
-    name: "Lock",
-    params: [
-      Math.round(Date.now() / 1000) + 60,
-      { value: hre.ethers.utils.parseEther("0.001") },
-    ],
+    name: "SWC",
+    params: [],
   },
 ];
 
