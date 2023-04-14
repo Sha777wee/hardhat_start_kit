@@ -125,6 +125,8 @@ module.exports = {
 # 前端目录初始化
 cd bc_client
 npx create-react-app ./
+# 安装路由库
+npm install react-router-dom
 # antd蚂蚁组件库
 npm install antd
 # mobx方便统一管理状态变量
