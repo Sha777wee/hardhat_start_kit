@@ -35,8 +35,6 @@ npx hardhat init
 
 选择 javaScript 项目构建,其他选项保持默认
 
-![[项目框架搭建记录-1.png]]
-
 ```shell
 # 用到的其他库
 # openzepplin 安全智能合约库
@@ -52,7 +50,6 @@ npm install rimraf --save-dev
 "scripts": {
     "compile": "npx hardhat compile",
     "build": "npx hardhat compile",
-    // 部署合约并复制到前端目录,方便前端获取合约
     "deploy": "npx hardhat run scripts/deploy.js && npm run copy",
     "copy": "rimraf ../bc_client/src/contracts && cp -R ./artifacts/contracts ../bc_client/src/contracts",
     "server": "npx hardhat node --port 8545",
