@@ -1,35 +1,25 @@
-import { Layout, Menu } from "antd";
+import { Layout } from "antd";
 import React from "react";
 import "./App.scss";
 import Home from "./pages/home";
 import ERC20 from "./pages/ERC20";
 import ERC721 from "./pages/ERC721";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+
+import HeaderBlock from "./component/header";
+import SiderbarBlock from "./component/siderbar";
 
 const { Header, Content, Footer, Sider } = Layout;
 function App() {
-  const items = [
-    { key: "home", label: "首页" },
-    { key: "erc20", label: "ERC20" },
-    { key: "erc721", label: "ERC721" },
-  ];
-  const navigate = useNavigate();
-  const clickHandler = (e) => {
-    navigate(`/${e.key}`);
-  };
   return (
     <Layout>
       <Sider breakpoint="lg" collapsedWidth="0">
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["0"]}
-          items={items}
-          onClick={clickHandler}
-        />
+        <SiderbarBlock />
       </Sider>
       <Layout>
-        <Header className="header" />
+        <Header className="header">
+          <HeaderBlock />
+        </Header>
         <Content>
           <div className="content-block">
             <Routes>

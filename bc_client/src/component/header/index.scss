@@ -1,0 +1,23 @@
+.header-block {
+    .title {
+        color:#E0E0E0;
+        font-size: medium;
+        margin-left: 20px;
+    }
+    .connect-btn {
+        float: right;
+        margin:10px;
+    }
+    .account-info {
+        float: right;
+        .info-block{
+            font-size: small;
+            color:#E0E0E0;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+    .white-icon {
+        color: #FFFFFF;
+    }
+}
