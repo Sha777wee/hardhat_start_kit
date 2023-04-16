@@ -23,7 +23,8 @@ async function main() {
     contractDeployedInfo = {
       ...contractDeployedInfo,
       [contract.name]: {
-        [chainId]: contractInstance.address,
+        chainId: chainId,
+        address: contractInstance.address,
       },
     };
     console.log(
