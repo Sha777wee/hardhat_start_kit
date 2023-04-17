@@ -8,6 +8,7 @@ import { Routes, Route } from "react-router-dom";
 
 import HeaderBlock from "./component/header";
 import SiderbarBlock from "./component/siderbar";
+import ERC20Log from "./pages/ERC20Log";
 
 const { Header, Content, Footer, Sider } = Layout;
 function App() {
@@ -26,6 +27,7 @@ function App() {
               <Route path="/" element={<Home></Home>}></Route>
               <Route path="/home" element={<Home></Home>}></Route>
               <Route path="/erc20" element={<ERC20></ERC20>}></Route>
+              <Route path="/erc20-log" element={<ERC20Log></ERC20Log>}></Route>
               <Route path="/erc721" element={<ERC721></ERC721>}></Route>
             </Routes>
           </div>

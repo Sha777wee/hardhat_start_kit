@@ -41,7 +41,24 @@ describe("SWC", () => {
       expect(result).to.equal(1000);
     });
   });
+  describe("mint", () => {
+    it("mint", async () => {
+      const amount = 100;
+      const deployerBalance = await contract.balanceOf(deployer);
+      const address1Balance = await contract.balanceOf(address1);
+      await contract.mint(deployer);
+      await contract.mint(address1);
+      const _deployerBalance = await contract.balanceOf(deployer);
+      const _address1Balance = await contract.balanceOf(address1);
 
+      expect(_deployerBalance).to.equal(
+        parseInt(deployerBalance) + parseInt(amount)
+      );
+      expect(_address1Balance).to.equal(
+        parseInt(address1Balance) + parseInt(amount)
+      );
+    });
+  });
   describe("transfer", () => {
     it("sufficient sender balance", async () => {
       const amount = 10;

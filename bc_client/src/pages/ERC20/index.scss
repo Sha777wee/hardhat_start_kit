@@ -1,10 +1,27 @@
-.basic-block {
-    .title {
-        font-size: large;
-        font-weight: bold;
-        margin-bottom: 20px;
+.erc20-block {
+    .basic-block {
+        margin-top:20px;
+        .title {
+            font-size: large;
+            font-weight: bold;
+            margin-bottom: 20px;
+            .refresh-btn{
+                margin-left: 20px;
+            }
+        }
+        .info {
+            margin-left:10px;
+        }
     }
-    .info {
-        margin-left:10px;
+
+    .interact-block {
+        margin:30px 10px;  
+        width: 80%;
+        .label {
+            margin-top:20px;
+        } 
+        .input {
+            margin-top:10px;
+        }
     }
 }

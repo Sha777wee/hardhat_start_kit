@@ -18,11 +18,15 @@ contract SWC {
     );
 
     constructor() {
-        balanceOf[msg.sender] = 1000;
+        balanceOf[msg.sender] = totalSupply;
     }
 
-    function balancOf(address _owner) public view returns (uint) {
-        return balanceOf[_owner];
+    function mint(address receiver) public returns (bool success) {
+        require(balanceOf[receiver] + 100 > balanceOf[receiver]);
+        require(totalSupply + 100 > totalSupply);
+        balanceOf[receiver] += 100;
+        totalSupply += 100;
+        return true;
     }
 
     function transfer(
@@ -62,4 +66,6 @@ contract SWC {
         emit Transfer(_from, _to, _value);
         return true;
     }
+
+    fallback() external {}
 }

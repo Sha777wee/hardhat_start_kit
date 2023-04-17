@@ -36,12 +36,15 @@ function HeaderBlock() {
         (await provider.getNetwork()).chainId.toString()
       );
 
-      window.ethereum.on("accountsChanged", (accounts) => {
+      window.ethereum.on("accountsChanged", async (accounts) => {
         store.metamaskStorage.setAddress(accounts[0]);
         message.info(`账号切换为： ${accounts[0]}`);
+        await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
       });
       window.ethereum.on("chainChanged", (chainId) => {
-        store.metamaskStorage.setChainId(parseInt(chainId, 16));
+        store.metamaskStorage.chainId.setChainId(parseInt(chainId, 16));
         message.info(`网络ID切换为： ${parseInt(chainId, 16)}`);
       });
     }
@@ -49,6 +52,7 @@ function HeaderBlock() {
 
   const logout = () => {
     store.metamaskStorage.clear();
+    store.erc20Storage.clear();
   };
 
   const copyHandler = (value, result) => {

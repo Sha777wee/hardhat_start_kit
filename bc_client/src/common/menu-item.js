@@ -2,6 +2,7 @@ import React from "react";
 import {
   DollarCircleOutlined,
   HomeOutlined,
+  FileSearchOutlined,
   PictureOutlined,
   SolutionOutlined,
 } from "@ant-design/icons";
@@ -11,6 +12,11 @@ const MenuItem = [
     key: "erc20",
     label: "ERC20",
     icon: React.createElement(DollarCircleOutlined),
+  },
+  {
+    key: "erc20-log",
+    label: "ERC20 记录",
+    icon: React.createElement(FileSearchOutlined),
   },
   {
     key: "erc721",
