@@ -1,6 +1,8 @@
 import { Table } from "antd";
 import "./index.scss";
 import { observer } from "mobx-react-lite";
+import { http } from "@/utils";
+import { useState } from "react";
 function ERC20Log() {
   const columns = [
     {
@@ -22,115 +24,15 @@ function ERC20Log() {
     },
     {
       title: "金额",
-      dataIndex: "amount",
-      key: "amount",
+      dataIndex: "value",
+      key: "value",
       responsive: ["md"],
     },
-    {
-      title: "时间",
-      dataIndex: "time",
-      key: "time",
-      responsive: ["lg"],
-    },
   ];
-  const data = [
-    {
-      key: "1",
-      operation: "转账",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-    {
-      key: "1",
-      operation: "授权",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-    {
-      key: "1",
-      operation: "提取",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-    {
-      key: "1",
-      operation: "转账",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-    {
-      key: "1",
-      operation: "授权",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-    {
-      key: "1",
-      operation: "提取",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-    {
-      key: "1",
-      operation: "转账",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-    {
-      key: "1",
-      operation: "授权",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-    {
-      key: "1",
-      operation: "提取",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-    {
-      key: "1",
-      operation: "转账",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-    {
-      key: "1",
-      operation: "授权",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-    {
-      key: "1",
-      operation: "提取",
-      from: "0x4a9c0bb32b497b7889892f93766e917b357c94ba",
-      to: "0xe52ADa302B0947F3AEc65229331390292335c3ab",
-      amount: "100",
-      time: "2023-4-16 12:00:00",
-    },
-  ];
+  let [data, setData] = useState([]);
+  http.get("/erc20/log").then((res) => {
+    setData(res.data);
+  });
   return (
     <div>
       <Table columns={columns} dataSource={data} />
